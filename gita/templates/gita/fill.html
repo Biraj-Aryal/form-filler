@@ -1,0 +1,123 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <!-- image_upload.html -->
+
+<div class="container text-left">
+  <br>
+  <h1 class="text-center">Quick Form</h1>
+  <br>
+
+  <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      {% csrf_token %}  
+
+      <div class="form-row">
+        <!-- Engname -->
+        <div class="form-group col-md-6 mb-0">
+        {{ form.eng_name.label_tag }}
+        {{ form.eng_name }}
+        </div>
+        <!-- Nepname -->
+        <div class="form-group col-md-6 mb-0">
+        {{ form.nep_name.label_tag }}
+        {{ form.nep_name }}
+        </div>
+      </div>
+      <br>
+
+      <div class="form-row">
+        <!-- DOB -->
+        <div class="form-group col-md-6 mb-0">
+        {{ form.dOB.label_tag }}
+        {{ form.dOB }}
+        </div>
+        <!-- Registration Number  -->
+        <div class="form-group col-md-6 mb-0">
+          <label for="numeric-hyphen-field">Registration Number:</label>
+          <input type="text" id="numeric-hyphen-field" name="numeric-hyphen-field" placeholder='Use numbers (English) and hyphen. E.g. 123456-78' required class="form-control">
+        </div>
+      </div>
+      <br>      
+      <div class="form-row">
+        <!-- Gender -->
+        <div class="form-group col-md-6 mb-0">
+        {{ form.genders.label_tag }}
+        {{ form.genders }}
+        </div>
+        <!-- Year -->
+        <div class="form-group col-md-6 mb-0">
+        {{ form.year.label_tag }}
+        {{ form.year }}        
+        <!-- Sem -->
+        {{ form.sem.label_tag }}
+        {{ form.sem }}
+        </div>
+      </div>
+      <br>
+      <h6 class="alert-warning text-center">Note: You may proceed to the download button with or without the images</h6>
+
+      <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+        <!-- Photo -->
+        {{ form.photo.label_tag }}
+        {{ form.photo }}
+        </div>
+        <!-- Sign -->
+        <div class="form-group col-md-6 mb-0">
+        {{ form.sign.label_tag }}
+        {{ form.sign }}  
+        </div>    
+      </div>
+      
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success btn-block btn-lg">Download</button>
+  </form>
+
+</div>
+<br>
+<br>
+<br>
+<div class="text-center">
+  <h4>Note:</h4>Please review the downloaded file. 
+    This form fills courses based on BBM LLB's syllabus, but you can edit it.
+</div>
+
+
+
+
+<!-- Fixing the numeric-hyphen field to retrict only numbers and hyphen, 
+    which otherwise would have accpeted any characters -->
+<script>
+  const inputField = document.getElementById('numeric-hyphen-field');
+  inputField.addEventListener('input', function(event) {
+    const regex = /^[0-9-]+$/;
+    const input = event.target.value;
+    if (!regex.test(input)) {
+      event.target.value = input.replace(/[^0-9-]/g, '');
+    }
+    
+    // Limit the input to 15 characters
+    if (event.target.value.length > 15) {
+      event.target.value = event.target.value.slice(0, 15);
+    }
+  });
+</script>
+
+
+<!-- To allow only devnagati letters-->
+<script>
+    function validateDevanagari(input) {
+        var regex = /^[\u0900-\u097F\s]+$/; // Regex to allow only Devanagari characters and spaces
+        var value = input.value;
+        if (!regex.test(value)) {
+            input.value = value.replace(/[^\u0900-\u097F\s]/g, ''); // Remove non-Devanagari characters
+        }
+    }
+</script>
+
+
+<!-- <style>
+  body {
+    background-color: #f1f1f1;
+  }
+</style> -->
