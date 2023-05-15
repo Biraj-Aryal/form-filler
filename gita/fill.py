@@ -12,6 +12,7 @@ cwd = os.getcwd()
 # pip install docxtpl
 # pip install Pillow
 # pip install regex
+# pip install django
 
 def fill_my_form(main_dir,
                 photo_ = 'photo.png',
